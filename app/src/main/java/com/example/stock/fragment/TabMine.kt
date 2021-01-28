@@ -3,10 +3,12 @@ package com.example.stock.fragment
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
+import android.widget.Toolbar
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.SwitchCompat
@@ -22,7 +24,7 @@ import kotlinx.android.synthetic.main.fragment_tab_mine.*
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-class TabMine : BaseFragment() {
+class TabMine : BaseFragment(), Toolbar.OnMenuItemClickListener {
 
     private var param1: String? = null
     private var param2: String? = null
@@ -58,6 +60,8 @@ class TabMine : BaseFragment() {
     @RequiresApi(Build.VERSION_CODES.M)
     override fun initView() {
 
+        initToolbar()
+
         myLiveDataModel = ViewModelUtils.getViewModel(this, MyLiveDataModel::class.java)
         myLiveDataModel.mGestureHas.observe(this, Observer {
             switchGestureMine.isChecked = it
@@ -66,6 +70,12 @@ class TabMine : BaseFragment() {
         initGesture()
 
         initFinger()
+    }
+
+    private fun initToolbar() {
+
+        toolbarTabMine.inflateMenu(R.menu.tab_mine)
+        toolbarTabMine.setOnMenuItemClickListener(this::onMenuItemClick)
     }
 
     private fun initGesture() {
@@ -113,12 +123,21 @@ class TabMine : BaseFragment() {
     private fun alertClearGesture() {
 
         AlertDialog.Builder(requireContext()).setMessage(R.string.confirmClearGesturePassword)
-            .setPositiveButton("确定"
+            .setPositiveButton(
+                "确定"
             ) { _, _ -> myLiveDataModel.setGesturePassword(null) }
             .setOnCancelListener {
                 switchGestureMine.isChecked = myLiveDataModel.mGestureHas.value ?: false
             }
             .create()
             .show()
+    }
+
+    override fun onMenuItemClick(item: MenuItem?): Boolean {
+        if (item?.itemId == R.id.menu_set_tab_mine) {
+            GestureActivity.startAct(requireContext())
+            return true
+        }
+        return false
     }
 }

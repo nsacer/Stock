@@ -4,19 +4,15 @@ import android.Manifest
 import android.os.Bundle
 import android.os.Handler
 import android.os.Message
-import android.view.KeyEvent
 import android.widget.RadioButton
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import com.example.stock.fragment.TabHome
 import com.example.stock.fragment.TabMine
 import com.example.stock.fragment.TabStock
 import com.example.stock.utils.SystemUtil
 import com.github.jokar.permission.PermissionUtil
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlin.system.exitProcess
 
-class MainActivity : AppCompatActivity(), Handler.Callback {
+class MainActivity : BaseActivity(), Handler.Callback {
 
     //记录按下返回键的时间
     private var mTimeKeyDown: Long = 0
@@ -27,16 +23,9 @@ class MainActivity : AppCompatActivity(), Handler.Callback {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        initView()
-        initData()
     }
 
-    private fun initData() {
-
-
-    }
-
-    private fun initView() {
+    override fun initView() {
 
         requestPermissions()
 
@@ -56,12 +45,13 @@ class MainActivity : AppCompatActivity(), Handler.Callback {
                 Manifest.permission.READ_EXTERNAL_STORAGE
             )
             .setDenied {
-                Toast.makeText(this, "no permission", Toast.LENGTH_SHORT).show()
+                showToast("没有权限")
             }
             .setGrant {
-                Toast.makeText(this, "has permission", Toast.LENGTH_SHORT).show()
+                showToast("有权限")
             }
             .setNeverAskAgain {
+
             }
             .request()
     }
@@ -104,20 +94,21 @@ class MainActivity : AppCompatActivity(), Handler.Callback {
         }
     }
 
-    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
-        if (keyCode == KeyEvent.KEYCODE_BACK && KeyEvent.ACTION_DOWN == event?.action) {
-            val currentTime = System.currentTimeMillis()
-            if (currentTime - mTimeKeyDown > 2000) {
-                Toast.makeText(this, R.string.press_again_exit, Toast.LENGTH_SHORT).show()
-                mTimeKeyDown = currentTime
-            } else {
-                finish()
-                exitProcess(0)
-            }
-            return true
-        }
-        return super.onKeyDown(keyCode, event)
+    override fun onBackPressed() {
+        exitApp()
     }
+
+    //退出App
+    private fun exitApp() {
+        val currentTime = System.currentTimeMillis()
+        if (currentTime - mTimeKeyDown > 2000) {
+            showToast(R.string.press_again_exit)
+            mTimeKeyDown = currentTime
+        } else {
+            finish()
+        }
+    }
+
 
     override fun handleMessage(msg: Message): Boolean {
 

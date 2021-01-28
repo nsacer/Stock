@@ -14,6 +14,8 @@ public class SharedPreferencesUtils {
     public static final String DEVICE_ID = "device_id";
     //本地存储的手势密码string
     public static final String GESTURE = "gesturePassword";
+    //主题样式是否是夜间模式
+    public static final String THEME_DARK = "themeDark";
     //本地存储的账号string
     public static final String ACCOUNT = "account";
     public static final String PASSWORD = "password";

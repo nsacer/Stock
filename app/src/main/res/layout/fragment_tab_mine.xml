@@ -6,16 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".fragment.TabMine">
 
-    <TextView
-        android:id="@+id/tvSetTitleMine"
-        android:layout_width="wrap_content"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarTabMine"
+        style="@style/Widget.MaterialComponents.Toolbar.Primary"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp"
-        android:text="@string/set"
-        android:textColor="#333"
-        android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="@string/tab_mine" />
 
     <TextView
         android:id="@+id/tvGestureSetMine"
@@ -24,7 +21,7 @@
         android:padding="24dp"
         android:text="@string/loginGesture"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvSetTitleMine" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbarTabMine" />
 
     <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/switchGestureMine"
