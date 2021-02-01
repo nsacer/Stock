@@ -11,6 +11,8 @@
     <color name="tab_nor">#CBCBCB</color>
     <color name="line">#999</color>
     <color name="titlePage">#333</color>
+    <color name="textColorLight">#333</color>
+    <color name="textColorNight">#FFF</color>
 
     <color name="primary">#E91E63</color>
     <color name="primary_dark">#C2185B</color>
@@ -28,4 +30,9 @@
     <!--列表展示的浅灰色背景 让白色的item更加突出-->
     <color name="list_background">#E5E5E5</color>
     <color name="list_background_dark">@color/window_background_dark</color>
+    <color name="light_blue_600">#FF039BE5</color>
+    <color name="light_blue_900">#FF01579B</color>
+    <color name="light_blue_A200">#FF40C4FF</color>
+    <color name="light_blue_A400">#FF00B0FF</color>
+    <color name="black_overlay">#66000000</color>
 </resources>

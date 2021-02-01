@@ -18,13 +18,11 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
 /**
- * create an instance of this fragment.
+ * 首页Fragment
  */
 class TabHome : BaseFragment() {
 
@@ -60,25 +58,13 @@ class TabHome : BaseFragment() {
             }
     }
 
-    override fun onResume() {
-        super.onResume()
-        logInfo("resume")
-    }
-
-    override fun onPause() {
-        super.onPause()
-        logInfo("pause")
-    }
-
     override fun initView() {
 
         mAdapter = AdapterIndexList(mutableListOf())
         rvHome.layoutManager = LinearLayoutManager(requireContext())
         rvHome.adapter = mAdapter
 
-        swipeRefreshHome.setOnRefreshListener {
-            requestData()
-        }
+        swipeRefreshHome.setOnRefreshListener { requestData() }
         swipeRefreshHome.isRefreshing = true
         requestData()
     }
@@ -94,7 +80,6 @@ class TabHome : BaseFragment() {
                         call: Call<IndexModelResponse>,
                         response: Response<IndexModelResponse>
                     ) {
-                        logInfo(response.body()?.reason)
                         swipeRefreshHome.isRefreshing = false
                         if (response.body()?.result?.data?.isNotEmpty() == true) {
                             val newList = mutableListOf<Data>()
@@ -104,7 +89,6 @@ class TabHome : BaseFragment() {
                     }
 
                     override fun onFailure(call: Call<IndexModelResponse>, t: Throwable) {
-                        logInfo(t.message)
                         swipeRefreshHome.isRefreshing = false
                     }
                 })

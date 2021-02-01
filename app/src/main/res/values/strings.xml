@@ -10,8 +10,13 @@
     </array>
     <string name="press_again_exit">再按退出</string>
     <string name="set">设置</string>
+    <string name="success">成功</string>
+    <string name="fail">失败</string>
+    <string name="confirm">确定</string>
+    <string name="loginPhoneNum">手机号登录</string>
     <string name="loginGesture">手势登录</string>
     <string name="loginFinger">指纹登录</string>
+    <string name="loginSuccess">登录成功</string>
     <string name="passwordRight">密码正确</string>
     <string name="gestureTooShort">密码太短，请重新设置</string>
     <string name="gestureCheck">验证密码</string>
@@ -19,4 +24,8 @@
     <string name="gestureInputAgain">请再次输入密码</string>
     <string name="gestureInputAgainNotSame">两次输入密码不一致</string>
     <string name="confirmClearGesturePassword">确定清除密码？</string>
+    <string name="title_activity_login">FullscreenActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="title_activity_fullscreen">FullscreenActivity</string>
 </resources>

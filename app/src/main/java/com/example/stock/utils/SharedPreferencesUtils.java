@@ -19,6 +19,8 @@ public class SharedPreferencesUtils {
     //本地存储的账号string
     public static final String ACCOUNT = "account";
     public static final String PASSWORD = "password";
+    //隐藏部分信息的账号
+    public static final String ACCOUNT_SAFE = "accountSafe";
     //本地存储的用户手机号string
     public static final String PHONE = "phone";
     //用户的UserId,string

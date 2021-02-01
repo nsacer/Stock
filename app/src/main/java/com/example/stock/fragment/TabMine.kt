@@ -7,15 +7,12 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
 import android.widget.Toolbar
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.SwitchCompat
-import androidx.lifecycle.Observer
 import com.example.stock.BaseFragment
 import com.example.stock.R
-import com.example.stock.activity.GestureActivity
 import com.example.stock.model.MyLiveDataModel
 import com.example.stock.utils.FingerUtils
 import com.example.stock.utils.ViewModelUtils
@@ -63,7 +60,7 @@ class TabMine : BaseFragment(), Toolbar.OnMenuItemClickListener {
         initToolbar()
 
         myLiveDataModel = ViewModelUtils.getViewModel(this, MyLiveDataModel::class.java)
-        myLiveDataModel.mGestureHas.observe(this, Observer {
+        myLiveDataModel.mGestureHas.observe(this, {
             switchGestureMine.isChecked = it
         })
 
@@ -81,11 +78,7 @@ class TabMine : BaseFragment(), Toolbar.OnMenuItemClickListener {
     private fun initGesture() {
 
         switchGestureMine.setOnClickListener {
-            if ((it as SwitchCompat).isChecked) {
-                GestureActivity.startAct(requireContext())
-            } else {
-                alertClearGesture()
-            }
+            showToast(R.string.set)
         }
     }
 
@@ -107,11 +100,11 @@ class TabMine : BaseFragment(), Toolbar.OnMenuItemClickListener {
                 FingerUtils.getInstance(requireContext())
                     .setFingerCheckListener(object : FingerUtils.OnFingerCheckListener {
                         override fun onCheckSuccess() {
-                            Toast.makeText(requireContext(), "成功", Toast.LENGTH_SHORT).show()
+                            showToast(R.string.success)
                         }
 
                         override fun onCheckFailed(message: String?) {
-                            Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+                            showToast(message)
                         }
 
                     })
@@ -120,11 +113,12 @@ class TabMine : BaseFragment(), Toolbar.OnMenuItemClickListener {
         }
     }
 
+    //清除密码确认弹窗
     private fun alertClearGesture() {
 
         AlertDialog.Builder(requireContext()).setMessage(R.string.confirmClearGesturePassword)
             .setPositiveButton(
-                "确定"
+                R.string.confirm
             ) { _, _ -> myLiveDataModel.setGesturePassword(null) }
             .setOnCancelListener {
                 switchGestureMine.isChecked = myLiveDataModel.mGestureHas.value ?: false
@@ -135,7 +129,7 @@ class TabMine : BaseFragment(), Toolbar.OnMenuItemClickListener {
 
     override fun onMenuItemClick(item: MenuItem?): Boolean {
         if (item?.itemId == R.id.menu_set_tab_mine) {
-            GestureActivity.startAct(requireContext())
+            showToast(R.string.set)
             return true
         }
         return false

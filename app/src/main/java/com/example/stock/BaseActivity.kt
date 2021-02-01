@@ -1,11 +1,16 @@
 package com.example.stock
 
 import android.os.Bundle
+import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.stock.utils.ThemeUtils
 
 abstract class BaseActivity : AppCompatActivity() {
+
+    //是否执行了初始化方法
+    private var mViewInit = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -14,7 +19,10 @@ abstract class BaseActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        initView()
+        if (!mViewInit) {
+            initView()
+            mViewInit = true
+        }
     }
 
     abstract fun initView()
@@ -25,5 +33,18 @@ abstract class BaseActivity : AppCompatActivity() {
 
     fun showToast(resId: Int) {
         Toast.makeText(this, resId, Toast.LENGTH_SHORT).show()
+    }
+
+    fun logInfo(content: String?) {
+        Log.i("xxxx", "${javaClass.simpleName}:$content")
+    }
+
+    fun setFullScreen() {
+        window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                or View.SYSTEM_UI_FLAG_FULLSCREEN
+                or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                or View.SYSTEM_UI_FLAG_LAYOUT_STABLE)
     }
 }

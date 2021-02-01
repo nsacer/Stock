@@ -1,15 +1,15 @@
 package com.example.stock.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.example.stock.BaseFragment
 import com.example.stock.R
-import com.example.stock.databinding.FragmentTabStockBinding
-import com.example.stock.model.MyObserveModel
+import com.example.stock.activity.LoginActivity
+import kotlinx.android.synthetic.main.fragment_tab_stock.*
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
@@ -37,14 +37,7 @@ class TabStock : BaseFragment() {
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-        val binding = DataBindingUtil.inflate<FragmentTabStockBinding>(
-            inflater,
-            R.layout.fragment_tab_stock,
-            container,
-            false
-        )
-        binding.models = MyObserveModel()
-        return binding.root
+        return inflater.inflate(R.layout.fragment_tab_stock, container, false)
     }
 
     companion object {
@@ -61,5 +54,8 @@ class TabStock : BaseFragment() {
 
     override fun initView() {
 
+        btnJumpFullscreen.setOnClickListener {
+            startActivity(Intent(requireContext(), LoginActivity::class.java))
+        }
     }
 }

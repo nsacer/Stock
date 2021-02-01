@@ -5,10 +5,12 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Message
 import android.widget.RadioButton
+import com.example.stock.activity.LoginActivity
 import com.example.stock.fragment.TabHome
 import com.example.stock.fragment.TabMine
 import com.example.stock.fragment.TabStock
 import com.example.stock.utils.SystemUtil
+import com.example.stock.utils.UserUtil
 import com.github.jokar.permission.PermissionUtil
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -22,7 +24,6 @@ class MainActivity : BaseActivity(), Handler.Callback {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
     }
 
     override fun initView() {
@@ -81,6 +82,15 @@ class MainActivity : BaseActivity(), Handler.Callback {
         resources.getStringArray(R.array.tabName).forEachIndexed { index, s ->
             if (s == findViewById<RadioButton>(checkedId).text) curr = index
         }
+
+        if (curr == resources.getStringArray(R.array.tabName).size - 1 &&
+            !UserUtil.isLogin()
+        ) {
+            LoginActivity.openLoginAct(this)
+            (rgTab.getChildAt(rgTab.tag as Int) as RadioButton).isChecked = true
+            return
+        }
+
         val transition = supportFragmentManager.beginTransaction()
         mTags.forEachIndexed { _, s ->
             if (supportFragmentManager.findFragmentByTag(s) != null) {
@@ -92,6 +102,8 @@ class MainActivity : BaseActivity(), Handler.Callback {
         } else {
             transition.add(R.id.flRoot, mListTab[curr], mTags[curr]).commit()
         }
+
+        rgTab.tag = curr
     }
 
     override fun onBackPressed() {

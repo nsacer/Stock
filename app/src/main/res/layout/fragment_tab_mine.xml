@@ -14,14 +14,36 @@
         app:layout_constraintTop_toTopOf="parent"
         app:title="@string/tab_mine" />
 
+    <ImageView
+        android:id="@+id/ivAvatarTabMine"
+        android:layout_width="80dp"
+        android:layout_height="0dp"
+        android:layout_margin="16dp"
+        android:contentDescription="@null"
+        app:layout_constraintDimensionRatio="1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbarTabMine" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvAccountTabMine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:maxLines="1"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/ivAvatarTabMine"
+        app:layout_constraintStart_toEndOf="@+id/ivAvatarTabMine"
+        app:layout_constraintTop_toTopOf="@+id/ivAvatarTabMine" />
+
     <TextView
         android:id="@+id/tvGestureSetMine"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:padding="24dp"
         android:text="@string/loginGesture"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbarTabMine" />
+        app:layout_constraintTop_toBottomOf="@+id/ivAvatarTabMine" />
 
     <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/switchGestureMine"
