@@ -9,8 +9,9 @@ import com.example.stock.activity.LoginActivity
 import com.example.stock.fragment.TabHome
 import com.example.stock.fragment.TabMine
 import com.example.stock.fragment.TabStock
+import com.example.stock.model.MyLiveDataModel
 import com.example.stock.utils.SystemUtil
-import com.example.stock.utils.UserUtil
+import com.example.stock.utils.ViewModelUtils
 import com.github.jokar.permission.PermissionUtil
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -20,10 +21,21 @@ class MainActivity : BaseActivity(), Handler.Callback {
     private var mTimeKeyDown: Long = 0
     private var mListTab: MutableList<BaseFragment> = mutableListOf()
     private lateinit var mTags: Array<String>
+    private lateinit var mLiveDataModel: MyLiveDataModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+    }
+
+    override fun initData() {
+        super.initData()
+        mLiveDataModel = ViewModelUtils.getViewModel(this, MyLiveDataModel::class.java)
+        mLiveDataModel.mIsLogin.observe(this, {
+            if (!it) {
+                logInfo("mieyoudenglu")
+            }
+        })
     }
 
     override fun initView() {
@@ -84,7 +96,8 @@ class MainActivity : BaseActivity(), Handler.Callback {
         }
 
         if (curr == resources.getStringArray(R.array.tabName).size - 1 &&
-            !UserUtil.isLogin()
+            ViewModelUtils.getViewModel(this, MyLiveDataModel::class.java)
+                .mIsLogin.value == false
         ) {
             LoginActivity.openLoginAct(this)
             (rgTab.getChildAt(rgTab.tag as Int) as RadioButton).isChecked = true

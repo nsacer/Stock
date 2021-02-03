@@ -1,12 +1,9 @@
 package com.example.stock
 
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -16,6 +13,8 @@ import kotlin.coroutines.CoroutineContext
 abstract class BaseFragment : Fragment(), CoroutineScope {
 
     lateinit var mJob: Job
+    private var mIsFirstEnter = true
+    private var mIsVisibleToUser = false
 
     override val coroutineContext: CoroutineContext
         get() = mJob + Dispatchers.Main
@@ -23,8 +22,30 @@ abstract class BaseFragment : Fragment(), CoroutineScope {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mJob = Job()
+        initData()
         initView()
     }
+
+    override fun onResume() {
+        super.onResume()
+        if (mIsFirstEnter) {
+            mIsFirstEnter = false
+            onFirstVisible()
+        } else if (mIsVisibleToUser) onVisible()
+    }
+
+    override fun onHiddenChanged(hidden: Boolean) {
+        super.onHiddenChanged(hidden)
+        mIsVisibleToUser = !hidden
+        if (mIsVisibleToUser) onVisible()
+    }
+
+    open fun onFirstVisible() {}
+
+    open fun onVisible() {}
+
+    //初始化设置LiveModel的监听
+    open fun initData() {}
 
     abstract fun initView()
 

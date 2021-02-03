@@ -9,7 +9,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="tab_red">#DD5044</color>
     <color name="tab_nor">#CBCBCB</color>
-    <color name="line">#999</color>
+    <color name="line">#CCCBCBCB</color>
     <color name="titlePage">#333</color>
     <color name="textColorLight">#333</color>
     <color name="textColorNight">#FFF</color>

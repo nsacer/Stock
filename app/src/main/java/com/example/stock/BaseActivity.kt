@@ -20,10 +20,13 @@ abstract class BaseActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         if (!mViewInit) {
+            initData()
             initView()
             mViewInit = true
         }
     }
+
+    open fun initData() {}
 
     abstract fun initView()
 

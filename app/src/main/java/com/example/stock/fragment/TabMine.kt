@@ -11,8 +11,10 @@ import android.widget.Toolbar
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.SwitchCompat
+import com.bumptech.glide.Glide
 import com.example.stock.BaseFragment
 import com.example.stock.R
+import com.example.stock.activity.GestureActivity
 import com.example.stock.model.MyLiveDataModel
 import com.example.stock.utils.FingerUtils
 import com.example.stock.utils.ViewModelUtils
@@ -54,19 +56,56 @@ class TabMine : BaseFragment(), Toolbar.OnMenuItemClickListener {
             }
     }
 
+    override fun onVisible() {
+        super.onVisible()
+    }
+
     @RequiresApi(Build.VERSION_CODES.M)
     override fun initView() {
 
         initToolbar()
+        initGesture()
+        initFinger()
+        initHeader()
+    }
+
+    override fun initData() {
+        super.initData()
 
         myLiveDataModel = ViewModelUtils.getViewModel(this, MyLiveDataModel::class.java)
+        //用户头像信息
+        myLiveDataModel.mAvatarUrl.observe(this, {
+            Glide.with(requireContext())
+                .load(it)
+                .circleCrop()
+                .placeholder(R.mipmap.app_start)
+                .into(ivAvatarTabMine)
+        })
+        //账号信息
+        myLiveDataModel.mAccountSafe.observe(this, {
+            tvAccountTabMine.text = it
+        })
+        //手势登录开关
         myLiveDataModel.mGestureHas.observe(this, {
             switchGestureMine.isChecked = it
         })
+        //指纹登录开关
+        myLiveDataModel.mFingerPwd.observe(this, {
+            switchFingerMine.isChecked = it
+        })
+    }
 
-        initGesture()
+    //头像账号昵称设置
+    private fun initHeader() {
 
-        initFinger()
+        Glide.with(requireContext()).load(resources.getStringArray(R.array.picUrlArray)[0])
+            .circleCrop()
+            .placeholder(R.mipmap.app_start)
+            .into(ivAvatarTabMine)
+
+        vLineAvaBtmLoginAct.setOnClickListener {
+            showToast("跳转头像、昵称等设置页面")
+        }
     }
 
     private fun initToolbar() {
@@ -75,10 +114,38 @@ class TabMine : BaseFragment(), Toolbar.OnMenuItemClickListener {
         toolbarTabMine.setOnMenuItemClickListener(this::onMenuItemClick)
     }
 
+    override fun onMenuItemClick(item: MenuItem?): Boolean {
+        if (item?.itemId == R.id.menu_set_tab_mine) {
+            showToast(R.string.set)
+            return true
+        }
+        return false
+    }
+
+    //退出登录弹窗
+    private fun alertExitAppDialog() {
+
+        AlertDialog.Builder(requireContext())
+            .setMessage(R.string.logout)
+            .setPositiveButton(R.string.confirm) { dialog, _ ->
+                myLiveDataModel.logout()
+                dialog.dismiss()
+            }
+            .setNegativeButton(R.string.cancel) { dialog, _ ->
+                dialog.dismiss()
+            }
+    }
+
+    //手势密码设置
     private fun initGesture() {
 
         switchGestureMine.setOnClickListener {
-            showToast(R.string.set)
+            if (myLiveDataModel.mGestureHas.value == true) {
+                myLiveDataModel.setGesturePassword(null)
+            } else {
+                GestureActivity.startAct(requireContext())
+                (it as SwitchCompat).isChecked = false
+            }
         }
     }
 
@@ -125,13 +192,5 @@ class TabMine : BaseFragment(), Toolbar.OnMenuItemClickListener {
             }
             .create()
             .show()
-    }
-
-    override fun onMenuItemClick(item: MenuItem?): Boolean {
-        if (item?.itemId == R.id.menu_set_tab_mine) {
-            showToast(R.string.set)
-            return true
-        }
-        return false
     }
 }

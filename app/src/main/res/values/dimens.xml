@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="line">0.4dp</dimen>
+    <dimen name="line">0.1dp</dimen>
     <dimen name="titlePage">24sp</dimen>
     <dimen name="titlePagePadding">16dp</dimen>
     <dimen name="iconWidth">48dp</dimen>
+    <dimen name="setting_item_height">54dp</dimen>
+    <dimen name="setting_item_padding_hor">24dp</dimen>
 </resources>

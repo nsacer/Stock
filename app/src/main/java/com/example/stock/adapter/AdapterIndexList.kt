@@ -6,6 +6,9 @@ import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.example.stock.R
 import com.example.stock.model.indexList.Data
 
+/**
+ * 首页新闻列表Adapter
+ * */
 class AdapterIndexList(models: MutableList<Data>) :
     BaseQuickAdapter<Data, BaseViewHolder>(R.layout.item_index_news, models) {
 

@@ -5,7 +5,9 @@ import android.content.Intent
 import android.os.Bundle
 import com.example.stock.BaseActivity
 import com.example.stock.R
+import com.example.stock.model.MyLiveDataModel
 import com.example.stock.utils.UserUtil
+import com.example.stock.utils.ViewModelUtils
 import com.example.stock.utils.WxShareAndLoginUtils
 import kotlinx.android.synthetic.main.activity_login.*
 
@@ -30,7 +32,8 @@ class LoginActivity : BaseActivity() {
 
         ivCloseLoginAct.setOnClickListener { onBackPressed() }
         tvPhoneNumLoginAct.setOnClickListener {
-            UserUtil.saveUserInfo("15538391280")
+            val modelUser = ViewModelUtils.getViewModel(this, MyLiveDataModel::class.java)
+            modelUser.updateUserAccount("15538391280")
             showToast(R.string.loginSuccess)
             finish()
         }

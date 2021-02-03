@@ -16,7 +16,7 @@
 
     <ImageView
         android:id="@+id/ivAvatarTabMine"
-        android:layout_width="80dp"
+        android:layout_width="60dp"
         android:layout_height="0dp"
         android:layout_margin="16dp"
         android:contentDescription="@null"
@@ -35,41 +35,70 @@
         app:layout_constraintStart_toEndOf="@+id/ivAvatarTabMine"
         app:layout_constraintTop_toTopOf="@+id/ivAvatarTabMine" />
 
-    <TextView
+    <ImageView
+        android:layout_width="@dimen/iconWidth"
+        android:layout_height="@dimen/iconWidth"
+        android:contentDescription="@null"
+        android:scaleType="centerInside"
+        android:src="@drawable/ic_baseline_chevron_right_24"
+        app:layout_constraintBottom_toBottomOf="@+id/ivAvatarTabMine"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/ivAvatarTabMine" />
+
+    <View
+        android:id="@+id/vHeaderLoginAct"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/vLineAvaBtmLoginAct"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbarTabMine" />
+
+    <View
+        android:id="@+id/vLineAvaBtmLoginAct"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/line"
+        android:layout_marginTop="16dp"
+        android:background="@color/line"
+        app:layout_constraintTop_toBottomOf="@+id/ivAvatarTabMine" />
+
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvGestureSetMine"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/setting_item_height"
         android:layout_marginTop="16dp"
-        android:padding="24dp"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="@dimen/setting_item_padding_hor"
         android:text="@string/loginGesture"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivAvatarTabMine" />
+        app:layout_constraintTop_toBottomOf="@+id/vLineAvaBtmLoginAct" />
 
     <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/switchGestureMine"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="24dp"
+        android:layout_height="0dp"
+        android:paddingHorizontal="@dimen/setting_item_padding_hor"
         app:layout_constraintBottom_toBottomOf="@+id/tvGestureSetMine"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/tvGestureSetMine" />
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvFingerSetMine"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="24dp"
+        android:layout_height="@dimen/setting_item_height"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="@dimen/setting_item_padding_hor"
         android:text="@string/loginFinger"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@id/tvGestureSetMine"
         app:layout_constraintTop_toBottomOf="@+id/tvGestureSetMine" />
 
     <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/switchFingerMine"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="24dp"
+        android:layout_height="0dp"
+        android:paddingHorizontal="@dimen/setting_item_padding_hor"
         app:layout_constraintBottom_toBottomOf="@+id/tvFingerSetMine"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/switchGestureMine"
         app:layout_constraintTop_toTopOf="@+id/tvFingerSetMine" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

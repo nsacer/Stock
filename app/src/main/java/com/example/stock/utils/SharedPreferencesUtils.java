@@ -21,20 +21,8 @@ public class SharedPreferencesUtils {
     public static final String PASSWORD = "password";
     //隐藏部分信息的账号
     public static final String ACCOUNT_SAFE = "accountSafe";
-    //本地存储的用户手机号string
-    public static final String PHONE = "phone";
-    //用户的UserId,string
-    public static final String USER_ID = "user_id";
-    //customerId
-    public static final String CUSTOMER_ID = "customerId";
-    //实名认证
-    public static final String REALNAME = "realname";
-    //是否可以手势密码登录提示string
-    public static final String CAN_LOGIN_GESTURE_HINT = "canGestureLoginHint";
     //是否设置了指纹登陆boolean
     public static final String CAN_LOGIN_FINGER = "canLoginFinger";
-    //上次人工视频双录成功的videoId
-    public static final String VIDEO_ID = "videoId";
 
     public static SharedPreferences getInstance() {
         if (sp == null) {
