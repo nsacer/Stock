@@ -116,7 +116,7 @@ class TabMine : BaseFragment(), Toolbar.OnMenuItemClickListener {
 
     override fun onMenuItemClick(item: MenuItem?): Boolean {
         if (item?.itemId == R.id.menu_set_tab_mine) {
-            showToast(R.string.set)
+            alertExitAppDialog()
             return true
         }
         return false
@@ -134,6 +134,8 @@ class TabMine : BaseFragment(), Toolbar.OnMenuItemClickListener {
             .setNegativeButton(R.string.cancel) { dialog, _ ->
                 dialog.dismiss()
             }
+            .create()
+            .show()
     }
 
     //手势密码设置
@@ -141,7 +143,7 @@ class TabMine : BaseFragment(), Toolbar.OnMenuItemClickListener {
 
         switchGestureMine.setOnClickListener {
             if (myLiveDataModel.mGestureHas.value == true) {
-                myLiveDataModel.setGesturePassword(null)
+                alertClearGesture()
             } else {
                 GestureActivity.startAct(requireContext())
                 (it as SwitchCompat).isChecked = false
@@ -187,7 +189,10 @@ class TabMine : BaseFragment(), Toolbar.OnMenuItemClickListener {
             .setPositiveButton(
                 R.string.confirm
             ) { _, _ -> myLiveDataModel.setGesturePassword(null) }
-            .setOnCancelListener {
+            .setNegativeButton(R.string.cancel) { dialog, _ ->
+                dialog.dismiss()
+            }
+            .setOnDismissListener {
                 switchGestureMine.isChecked = myLiveDataModel.mGestureHas.value ?: false
             }
             .create()
