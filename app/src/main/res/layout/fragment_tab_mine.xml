@@ -101,4 +101,23 @@
         app:layout_constraintEnd_toEndOf="@+id/switchGestureMine"
         app:layout_constraintTop_toTopOf="@+id/tvFingerSetMine" />
 
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvNightModeMine"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/setting_item_height"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="@dimen/setting_item_padding_hor"
+        android:text="@string/nightMode"
+        app:layout_constraintStart_toStartOf="@id/tvGestureSetMine"
+        app:layout_constraintTop_toBottomOf="@+id/tvFingerSetMine" />
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/switchNightModeMine"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:paddingHorizontal="@dimen/setting_item_padding_hor"
+        app:layout_constraintBottom_toBottomOf="@+id/tvNightModeMine"
+        app:layout_constraintEnd_toEndOf="@+id/switchGestureMine"
+        app:layout_constraintTop_toTopOf="@+id/tvNightModeMine" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

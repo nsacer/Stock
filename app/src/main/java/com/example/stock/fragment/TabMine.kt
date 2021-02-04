@@ -64,9 +64,10 @@ class TabMine : BaseFragment(), Toolbar.OnMenuItemClickListener {
     override fun initView() {
 
         initToolbar()
+        initHeader()
         initGesture()
         initFinger()
-        initHeader()
+        initNightMode()
     }
 
     override fun initData() {
@@ -92,6 +93,10 @@ class TabMine : BaseFragment(), Toolbar.OnMenuItemClickListener {
         //指纹登录开关
         myLiveDataModel.mFingerPwd.observe(this, {
             switchFingerMine.isChecked = it
+        })
+        //夜间模式
+        myLiveDataModel.mNightMode.observe(this, {
+            switchNightModeMine.isChecked = it
         })
     }
 
@@ -180,6 +185,12 @@ class TabMine : BaseFragment(), Toolbar.OnMenuItemClickListener {
                     .authFingerPrint()
             }
         }
+    }
+
+    //夜间模式
+    private fun initNightMode() {
+
+        switchNightModeMine.setOnClickListener { myLiveDataModel.switchNightMode() }
     }
 
     //清除密码确认弹窗

@@ -33,8 +33,11 @@ class MainActivity : BaseActivity(), Handler.Callback {
         mLiveDataModel = ViewModelUtils.getViewModel(this, MyLiveDataModel::class.java)
         mLiveDataModel.mIsLogin.observe(this, {
             if (!it) {
-                logInfo("mieyoudenglu")
+                logInfo("没有登录")
             }
+        })
+        mLiveDataModel.mNeedRecreate.observe(this, {
+            if (it) recreate()
         })
     }
 

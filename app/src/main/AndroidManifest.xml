@@ -20,7 +20,9 @@
         android:theme="@style/Theme.Stock">
         <activity android:name=".activity.LoginActivity" />
         <activity android:name=".activity.GestureActivity" />
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".MainActivity"
+            android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

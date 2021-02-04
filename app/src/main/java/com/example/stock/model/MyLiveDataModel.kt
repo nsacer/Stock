@@ -18,6 +18,14 @@ class MyLiveDataModel : ViewModel() {
     }
 
     //是否需要重建
+    val mNeedRecreate: MutableLiveData<Boolean> by lazy {
+        MutableLiveData<Boolean>(false)
+    }
+
+    //重建主页
+    fun recreateMainAct() {
+        mNeedRecreate.value = true
+    }
 
     //是否有手势密码
     val mGestureHas: MutableLiveData<Boolean> by lazy {
@@ -33,6 +41,25 @@ class MyLiveDataModel : ViewModel() {
             SharedPreferencesUtils
                 .getBoolean(SharedPreferencesUtils.CAN_LOGIN_FINGER, false)
         )
+    }
+
+    //夜间模式
+    val mNightMode: MutableLiveData<Boolean> by lazy {
+        MutableLiveData<Boolean>(
+            SharedPreferencesUtils.getBoolean(
+                SharedPreferencesUtils.THEME_DARK,
+                false
+            )
+        )
+    }
+
+    //变更夜间模式状态
+    fun switchNightMode() {
+        val nightModeNew = mNightMode.value != true
+        SharedPreferencesUtils.saveBoolean(SharedPreferencesUtils.THEME_DARK, nightModeNew)
+        mNightMode.value = nightModeNew
+        //重建页面
+        recreateMainAct()
     }
 
     //用户的头像地址
@@ -52,15 +79,6 @@ class MyLiveDataModel : ViewModel() {
         MutableLiveData<String>(
             SharedPreferencesUtils.getString(SharedPreferencesUtils.ACCOUNT_SAFE, "")
         )
-    }
-
-    //切换手势密码登录
-    fun switchGesturePasswordLogin() {
-        if (mGestureHas.value == true) {
-            setGesturePassword(null)
-        } else {
-            //TODO
-        }
     }
 
     /**

@@ -20,6 +20,7 @@
     <string name="loginPhoneNum">手机号登录</string>
     <string name="loginGesture">手势登录</string>
     <string name="loginFinger">指纹登录</string>
+    <string name="nightMode">夜间模式</string>
     <string name="logout">退出登录</string>
     <string name="loginSuccess">登录成功</string>
     <string name="passwordRight">密码正确</string>
