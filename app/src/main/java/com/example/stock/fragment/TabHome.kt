@@ -9,6 +9,7 @@ import com.example.stock.BaseFragment
 import com.example.stock.Constant
 import com.example.stock.R
 import com.example.stock.RetrofitUtils
+import com.example.stock.activity.WebViewActivity
 import com.example.stock.adapter.AdapterIndexList
 import com.example.stock.model.indexList.Data
 import com.example.stock.model.indexList.IndexModelResponse
@@ -61,6 +62,11 @@ class TabHome : BaseFragment() {
     override fun initView() {
 
         mAdapter = AdapterIndexList(mutableListOf())
+        mAdapter.setOnItemClickListener { adapter, view, position ->
+            val url = mAdapter.data[position].url
+            if (url.isNullOrEmpty()) return@setOnItemClickListener
+            WebViewActivity.openAct(requireContext(), url)
+        }
         rvHome.layoutManager = LinearLayoutManager(requireContext())
         rvHome.adapter = mAdapter
 

@@ -1,25 +1,23 @@
 package com.example.stock.fragment
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import android.widget.Toolbar
 import com.example.stock.BaseFragment
 import com.example.stock.R
-import com.example.stock.activity.LoginActivity
+import com.example.stock.activity.SearchStockActivity
 import kotlinx.android.synthetic.main.fragment_tab_stock.*
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
 /**
- * A simple [Fragment] subclass.
- * Use the [TabStock.newInstance] factory method to
- * create an instance of this fragment.
+ * 自选股列表Fragment
  */
-class TabStock : BaseFragment() {
+class TabStock : BaseFragment(), Toolbar.OnMenuItemClickListener {
 
     private var param1: String? = null
     private var param2: String? = null
@@ -54,8 +52,22 @@ class TabStock : BaseFragment() {
 
     override fun initView() {
 
-        btnJumpFullscreen.setOnClickListener {
-            startActivity(Intent(requireContext(), LoginActivity::class.java))
+        initToolbar()
+
+    }
+
+    private fun initToolbar() {
+
+        toolbarTabStock.setTitle(R.string.tab_stock)
+        toolbarTabStock.inflateMenu(R.menu.tab_stock)
+        toolbarTabStock.setOnMenuItemClickListener(this::onMenuItemClick)
+    }
+
+    override fun onMenuItemClick(item: MenuItem?): Boolean {
+        if (item?.itemId == R.id.menu_add_stock) {
+            SearchStockActivity.openAct(requireContext())
+            return true
         }
+        return false
     }
 }

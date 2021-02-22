@@ -13,6 +13,9 @@
     <color name="titlePage">#333</color>
     <color name="textColorLight">#333</color>
     <color name="textColorNight">#FFF</color>
+    <color name="transparent">#00000000</color>
+    <color name="tab_stock_title_text_color">#FAFAFA</color>
+    <color name="tab_stock_indicator_color">#FAFAFA</color>
 
     <color name="primary">#E91E63</color>
     <color name="primary_dark">#C2185B</color>

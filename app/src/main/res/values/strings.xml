@@ -3,6 +3,11 @@
     <string name="tab_home">首页</string>
     <string name="tab_stock">自选</string>
     <string name="tab_mine">我的</string>
+    <string name="tab_stock_name">名称</string>
+    <string name="tab_stock_price">价格</string>
+    <string name="tab_stock_applies">涨跌幅</string>
+    <string name="add_new_stock">添加新股</string>
+    <string name="search">搜索</string>
     <array name="tabName">
         <item>首页</item>
         <item>自选</item>

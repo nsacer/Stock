@@ -18,6 +18,8 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.Stock">
+        <activity android:name=".activity.SearchStockActivity"></activity>
+        <activity android:name=".activity.WebViewActivity" />
         <activity android:name=".activity.LoginActivity" />
         <activity android:name=".activity.GestureActivity" />
         <activity
