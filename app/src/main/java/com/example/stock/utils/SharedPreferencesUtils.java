@@ -23,6 +23,8 @@ public class SharedPreferencesUtils {
     public static final String ACCOUNT_SAFE = "accountSafe";
     //是否设置了指纹登陆boolean
     public static final String CAN_LOGIN_FINGER = "canLoginFinger";
+    //本地存储的股票列表
+    public static final String STOCK_LIST_LOCAL = "stockListLocal";
 
     public static SharedPreferences getInstance() {
         if (sp == null) {
@@ -91,6 +93,45 @@ public class SharedPreferencesUtils {
     public static void deleteByKey(String key) {
         if (contains(key)) {
             getInstance().edit().remove(key).apply();
+        }
+    }
+
+    /**
+     * 存储本地的股票列表是否包含该股票
+     *
+     * @param stockCode 股票代码
+     */
+    public static boolean containsStock(String stockCode) {
+        if (stockCode == null || stockCode.isEmpty()) return true;
+        String stockCodeList = getString(STOCK_LIST_LOCAL, "");
+        return stockCodeList.contains(stockCode);
+    }
+
+    /**
+     * 添加股票
+     * 存储的格式：400900|400899|200100|
+     *
+     * @param stockCode 股票代码
+     */
+    public static void addStock(String stockCode) {
+        if (stockCode == null || stockCode.isEmpty()) return;
+        String stockCodeList = getString(STOCK_LIST_LOCAL, "");
+        if (stockCodeList.contains(stockCode)) return;
+        stockCodeList = stockCodeList + stockCode + "|";
+        saveString(STOCK_LIST_LOCAL, stockCodeList);
+    }
+
+    /**
+     * 删除本地存储的股票代码
+     *
+     * @param stockCode 要删除的股票代码
+     */
+    public static void delStock(String stockCode) {
+        if (stockCode == null || stockCode.isEmpty()) return;
+        String stockCodeList = getString(STOCK_LIST_LOCAL, "");
+        if (stockCodeList.contains(stockCode)) {
+            String stockListNew = stockCodeList.replace(stockCode + "|", "");
+            saveString(STOCK_LIST_LOCAL, stockListNew);
         }
     }
 

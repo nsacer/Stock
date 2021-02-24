@@ -2,6 +2,7 @@ package com.example.stock
 
 
 import com.example.stock.model.indexList.IndexModelResponse
+import com.example.stock.model.stockHq.StockHQResponse
 import com.example.stock.model.stockSearch.StockSearchResponse
 import retrofit2.Call
 import retrofit2.http.*
@@ -29,6 +30,16 @@ interface InterfaceRequestApi {
         @Query("version") version: String,
         @Query("content") content: String
     ): Call<StockSearchResponse>
+
+    /**
+     * 获取股票的行情数据
+     * */
+    @GET("/stock/simple")
+    fun stockHQ(
+        @Query("platform") platform: String,
+        @Query("version") version: String,
+        @Query("securityIDs") stocks: String
+    ): Call<StockHQResponse>
 
     //get请求
     @FormUrlEncoded

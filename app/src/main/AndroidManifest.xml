@@ -17,8 +17,9 @@
         android:icon="@mipmap/app_start"
         android:label="@string/app_name"
         android:supportsRtl="true"
+        android:networkSecurityConfig="@xml/security"
         android:theme="@style/Theme.Stock">
-        <activity android:name=".activity.SearchStockActivity"></activity>
+        <activity android:name=".activity.SearchStockActivity" />
         <activity android:name=".activity.WebViewActivity" />
         <activity android:name=".activity.LoginActivity" />
         <activity android:name=".activity.GestureActivity" />

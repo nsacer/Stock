@@ -10,6 +10,10 @@ class Constant {
         //设备的唯一标识符
         var deviceId = ""
         const val newTypeTop = "top"
+
+        //请求的平台
+        const val platform = "android"
+
         //搜索股票版本号码
         const val searchStockVersion = "4.9.9"
 

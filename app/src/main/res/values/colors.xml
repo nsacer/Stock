@@ -14,6 +14,9 @@
     <color name="textColorLight">#333</color>
     <color name="textColorNight">#FFF</color>
     <color name="transparent">#00000000</color>
+    <color name="stockSearchResultItemAdd">#E94B4B</color>
+    <color name="stockNameSearchItem">#333333</color>
+    <color name="stockCodeSearchItem">#999999</color>
     <color name="tab_stock_title_text_color">#FAFAFA</color>
     <color name="tab_stock_indicator_color">#FAFAFA</color>
 

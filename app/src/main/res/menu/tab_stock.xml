@@ -6,6 +6,7 @@
         android:id="@+id/menu_add_stock"
         android:orderInCategory="90"
         android:icon="@drawable/ic_baseline_add_24"
+        android:iconTint="@color/white"
         android:title="@string/add_new_stock"
         android:contentDescription="@string/add_new_stock"
         app:showAsAction="always"/>
