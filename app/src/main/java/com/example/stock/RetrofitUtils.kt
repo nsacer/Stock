@@ -65,7 +65,7 @@ class RetrofitUtils private constructor() {
         @Synchronized
         private fun getRetrofit(baseUrl: String): Retrofit {
 
-            val interceptor = HttpLoggingInterceptor { message -> Log.i("xxxx", message) }
+            val interceptor = HttpLoggingInterceptor { message -> Log.i("####", message) }
             interceptor.level = HttpLoggingInterceptor.Level.BODY
             val okClient = OkHttpClient.Builder().addInterceptor(interceptor)
                 .connectTimeout(5000, TimeUnit.MILLISECONDS)

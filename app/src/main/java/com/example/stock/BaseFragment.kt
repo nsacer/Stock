@@ -14,7 +14,7 @@ abstract class BaseFragment : Fragment(), CoroutineScope {
 
     lateinit var mJob: Job
     private var mIsFirstEnter = true
-    private var mIsVisibleToUser = false
+    private var mIsVisibleToUser = true
 
     override val coroutineContext: CoroutineContext
         get() = mJob + Dispatchers.Main

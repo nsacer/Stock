@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.stock.BaseFragment
 import com.example.stock.Constant
 import com.example.stock.R
@@ -74,7 +75,8 @@ class TabStock : BaseFragment(), Toolbar.OnMenuItemClickListener {
     private fun getLocalStockInfo() {
         val stocks = SharedPreferencesUtils.getString(SharedPreferencesUtils.STOCK_LIST_LOCAL, "")
         if (stocks.isEmpty()) {
-            mAdapterStocks.isUseEmpty = true
+            mAdapterStocks.setList(null)
+            srlTabStock.isRefreshing = false
         } else {
             requestHQ(stocks)
         }
@@ -104,6 +106,8 @@ class TabStock : BaseFragment(), Toolbar.OnMenuItemClickListener {
 
     private fun initRecyclerView() {
 
+        srlTabStock.setOnRefreshListener { getLocalStockInfo() }
+
         mAdapterStocks = AdapterStockCornerList()
         mAdapterStocks.setEmptyView(R.layout.empty_no_cornor_stock)
         rvStockListTabStock.layoutManager = LinearLayoutManager(requireContext())
@@ -122,18 +126,16 @@ class TabStock : BaseFragment(), Toolbar.OnMenuItemClickListener {
                         call: Call<StockHQResponse>,
                         response: Response<StockHQResponse>
                     ) {
+                        srlTabStock.isRefreshing = false
                         if (response.isSuccessful &&
-                            response.body()?.response?.infos?.isNotEmpty() == true) {
+                            response.body()?.response?.infos?.isNotEmpty() == true
+                        ) {
                             mAdapterStocks.setList(response.body()!!.response.infos)
-                        } else {
-                            mAdapterStocks.setList(null)
                         }
                     }
 
                     override fun onFailure(call: Call<StockHQResponse>, t: Throwable) {
-
-                        //TODO
-                        logInfo(t.message)
+                        srlTabStock.isRefreshing = false
                     }
                 })
         }

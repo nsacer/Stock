@@ -33,6 +33,7 @@ class MainActivity : BaseActivity(), Handler.Callback {
         mLiveDataModel = ViewModelUtils.getViewModel(this, MyLiveDataModel::class.java)
         mLiveDataModel.mIsLogin.observe(this, {
             if (!it) {
+                //TODO
                 logInfo("没有登录")
             }
         })
