@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.stock.BaseFragment
 import com.example.stock.Constant
 import com.example.stock.R
@@ -99,6 +98,10 @@ class TabStock : BaseFragment(), Toolbar.OnMenuItemClickListener {
     override fun onMenuItemClick(item: MenuItem?): Boolean {
         if (item?.itemId == R.id.menu_add_stock) {
             SearchStockActivity.openAct(requireContext())
+            return true
+        } else if (item?.itemId == R.id.menu_edit_stock) {
+            //TODO 编辑股票
+            showToast("编辑股票")
             return true
         }
         return false

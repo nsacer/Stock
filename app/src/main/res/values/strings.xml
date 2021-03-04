@@ -7,6 +7,7 @@
     <string name="tab_stock_price">价格</string>
     <string name="tab_stock_applies">涨跌幅</string>
     <string name="add_new_stock">添加新股</string>
+    <string name="edit">编辑</string>
     <string name="search">搜索</string>
     <string name="searchStock">搜索股票</string>
     <string name="cornerStockNo">暂未关注股票</string>

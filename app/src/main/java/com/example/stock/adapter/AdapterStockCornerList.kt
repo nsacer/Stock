@@ -13,6 +13,9 @@ import java.math.BigDecimal
 class AdapterStockCornerList :
     BaseQuickAdapter<Info, BaseViewHolder>(R.layout.stock_tab_list_item) {
 
+    //是否是编辑模式
+    private var mModeEdited = false
+
     override fun convert(holder: BaseViewHolder, item: Info) {
 
         holder.setText(R.id.tvStockNameListItem, item.stockName)
