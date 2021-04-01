@@ -14,7 +14,7 @@
     <application
         android:name=".ApplicationStock"
         android:allowBackup="true"
-        android:icon="@mipmap/app_start"
+        android:icon="@mipmap/love_icon"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:networkSecurityConfig="@xml/security"
