@@ -13,10 +13,11 @@
         android:background="@color/tab_nor"
         app:layout_constraintTop_toBottomOf="@+id/ivCoverIndexItem" />
 
-    <ImageView
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/ivCoverIndexItem"
         android:layout_width="80dp"
         android:layout_height="60dp"
+        app:shapeAppearance="@style/rectRound8ImageStyle"
         android:contentDescription="@null"
         android:scaleType="centerCrop"
         app:layout_constraintStart_toStartOf="parent"
